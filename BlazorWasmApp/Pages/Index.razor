@@ -1,0 +1,40 @@
+﻿@page "/"
+
+@inject NavigationManager navigationManager;
+
+<Toasts class="p-3" Messages="messages" Placement="ToastsPlacement.TopCenter" />
+
+<Button @onclick="NavigateToHoge">Go to Hoge</Button>
+<Button @onclick="NavigateToFuga">Go to Fuga</Button>
+
+@code
+{
+    readonly List<ToastMessage> messages = new();
+
+    protected override void OnInitialized()
+    {
+        var state = navigationManager.HistoryEntryState;
+        if (state is null) return;
+
+        ShowMessage(state);
+    }
+
+    private void ShowMessage(string title) => messages.Add(CreateToastMessage(title));
+
+    private static ToastMessage CreateToastMessage(string title)
+    => new()
+    {
+            Type = ToastType.Info,
+            Title = $"{title}"
+        };
+
+    private void NavigateToHoge()
+    {
+        navigationManager.NavigateTo("/hoge");
+    }
+
+    private void NavigateToFuga()
+    {
+        navigationManager.NavigateTo("/fuga");
+    }
+}

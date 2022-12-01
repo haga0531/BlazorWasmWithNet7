@@ -1,0 +1,17 @@
+﻿@page "/fuga"
+
+@inject NavigationManager navigationManager
+
+<h3>Fuga</h3>
+
+<button @onclick="NavigateToHome">Go Home</button>
+
+@code {
+    private void NavigateToHome()
+    {
+        navigationManager.NavigateTo("/", new NavigationOptions
+        {
+            HistoryEntryState = "fuga"
+        });
+    }
+}

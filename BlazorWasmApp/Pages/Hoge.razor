@@ -1,0 +1,17 @@
+﻿@page "/hoge"
+
+@inject NavigationManager navigationManager
+
+<h3>Hoge</h3>
+
+<button @onclick="NavigateToHome">Go Home</button>
+
+@code {
+    private void NavigateToHome()
+    {
+        navigationManager.NavigateTo("/", new NavigationOptions
+            {
+                HistoryEntryState = "hoge"
+            });
+    }
+}
